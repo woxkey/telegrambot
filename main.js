@@ -1,5 +1,5 @@
 const { Telegraf, Markup } = require("telegraf");
-require("dotenv").config(); //need for .env file to work here so my token is hidden
+require("dotenv").config();
 const text = require("./const");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -20,7 +20,6 @@ bot.command("course", async (ctx) => {
           Markup.button.callback("Redactors", "btn-1"),
           Markup.button.callback("Обзоры", "btn-2"),
         ],
-        [Markup.button.callback("Обзоры", "btn-3")],
       ])
     );
   } catch (err) {
@@ -47,7 +46,6 @@ function addActionBot(name, src, text) {
 
 addActionBot("btn-1", "./img/1.png", text.text1);
 addActionBot("btn-2", "./img/1.png", text.text2);
-addActionBot("btn-3", false, text.text3);
 
 bot.launch();
 
