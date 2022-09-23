@@ -1,19 +1,16 @@
 const commands = `
-/start - Start
-/help - Help
+/start - Начать
+/help - Помощь
+/plan - План обучения
 `;
 
 const text1 = `
 this is just a text 1 <a href = "https://almaty-crm.attractor-school.com">Link</a>
 `;
-const text2 = `
-this is just a text  2
-`;
-const text3 = `
-this is just a text 3
-`;
 
-module.exports.commands = commands; //exporting module
-module.exports.text1 = text1; //exporting module
-module.exports.text2 = text2; //exporting module
-module.exports.text3 = text3; //exporting module
+const plan =
+  "https://docs.google.com/document/u/0/d/1mMM6NioPA2Cq1yzB9ID31u1K6TaWvm4hIR0z8VkSq1M/mobilebasic";
+
+module.exports.commands = commands;
+module.exports.text1 = text1;
+module.exports.plan = plan;

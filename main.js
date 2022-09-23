@@ -1,31 +1,52 @@
 const { Telegraf, Markup } = require("telegraf");
 require("dotenv").config();
-const text = require("./const");
+const myConsts = require("./const");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-bot.start((ctx) => {
+bot.start(async (ctx) => {
   const firstName = ctx.message.from.first_name
     ? ctx.message.from.first_name
     : "Anonymos";
-  ctx.reply(`Hello ${firstName}`);
+  await ctx.reply(
+    `
+Привет, ${firstName}
+Чем тебе помочь?
+  `,
+    Markup.inlineKeyboard([
+      [Markup.button.url("Посмотреть план обучения", myConsts.plan)],
+      [Markup.button.callback("Помощь", "help-btn")],
+    ])
+  );
 });
-bot.help((ctx) => ctx.reply(text.commands));
+bot.help((ctx) => ctx.reply(myConsts.commands));
 
-bot.command("course", async (ctx) => {
+bot.command("plan", async (ctx) => {
   try {
-    await ctx.replyWithHTML(
-      "<b>Courses</b>",
-      Markup.inlineKeyboard([
-        [
-          Markup.button.callback("Redactors", "btn-1"),
-          Markup.button.callback("Обзоры", "btn-2"),
-        ],
-      ])
+    console.log(ctx);
+    await ctx.reply(
+      "Посмотреть план обучения:",
+      Markup.inlineKeyboard([[Markup.button.url("Ссылка", myConsts.plan)]])
     );
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    console.error(e);
   }
 });
+
+// bot.command("course", async (ctx) => {
+//   try {
+//     await ctx.replyWithHTML(
+//       "<b>Courses</b>",
+//       Markup.inlineKeyboard([
+//         [
+//           Markup.button.callback("Redactors", "btn-1"),
+//           Markup.button.callback("12", "btn-2"),
+//         ],
+//       ])
+//     );
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
 function addActionBot(name, src, text) {
   bot.action(name, async (ctx) => {
     try {
@@ -35,7 +56,7 @@ function addActionBot(name, src, text) {
           source: src,
         });
       }
-      await ctx.replyWithHTML(text, {
+      await ctx.reply(text, {
         disable_web_page_preview: true,
       });
     } catch (e) {
@@ -44,8 +65,18 @@ function addActionBot(name, src, text) {
   });
 }
 
-addActionBot("btn-1", "./img/1.png", text.text1);
-addActionBot("btn-2", "./img/1.png", text.text2);
+bot.action("help-btn", async (ctx) => {
+  try {
+    await ctx.answerCbQuery();
+    await ctx.reply(myConsts.commands);
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+addActionBot("plan-btn", false, myConsts.text1);
+
+addActionBot("btn-1", "./img/1.png", myConsts.text1);
 
 bot.launch();
 
