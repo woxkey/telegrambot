@@ -1,7 +1,33 @@
+const weekdays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 const commands = `
 /start - Начать
 /help - Помощь
 /plan - План обучения
+/time - Время 
 `;
 
 const text1 = `
@@ -14,3 +40,5 @@ const plan =
 module.exports.commands = commands;
 module.exports.text1 = text1;
 module.exports.plan = plan;
+module.exports.weekdays = weekdays;
+module.exports.monthNames = monthNames;

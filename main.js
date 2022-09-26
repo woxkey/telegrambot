@@ -32,6 +32,27 @@ bot.command("plan", async (ctx) => {
   }
 });
 
+bot.command("time", async (ctx) => {
+  try {
+    const currentTime = getCurrentTime();
+    await ctx.reply(`${currentTime}`);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+function getCurrentTime() {
+  const today = new Date();
+  const dateOfTheWeek = myConsts.weekdays[today.getDay()];
+  const day = today.getDate();
+  const nameOfCurrentMonth = myConsts.monthNames[today.getMonth()];
+  const hours = today.getHours();
+  const minutes = today.getMinutes();
+  const seconds = today.getSeconds();
+  const fullDate = `Today is ${dateOfTheWeek}, ${nameOfCurrentMonth} ${day}\nCurrent time is: ${hours}:${minutes}:${seconds}`;
+  return fullDate;
+}
+
 // bot.command("course", async (ctx) => {
 //   try {
 //     await ctx.replyWithHTML(
