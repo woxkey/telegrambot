@@ -43,7 +43,7 @@ bot.command("time", async (ctx) => {
 
 function getCurrentTime() {
   let today = new Date();
-  today.toString();
+  today.toLocaleString();
   const dateOfTheWeek = myConsts.weekdays[today.getDay()];
   const day = today.getDate();
   const nameOfCurrentMonth = myConsts.monthNames[today.getMonth()];
