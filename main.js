@@ -43,32 +43,20 @@ bot.command("time", async (ctx) => {
 
 function getCurrentTime() {
   let today = new Date();
-  today.toLocaleString();
   const dateOfTheWeek = myConsts.weekdays[today.getDay()];
   const day = today.getDate();
   const nameOfCurrentMonth = myConsts.monthNames[today.getMonth()];
   const hours = today.getHours();
   const minutes = today.getMinutes();
   const seconds = today.getSeconds();
-  const fullDate = `Today is ${dateOfTheWeek}, ${nameOfCurrentMonth} ${day}\nCurrent time is: ${hours}:${minutes}:${seconds}`;
+  const fullDate = `Today is ${dateOfTheWeek}, ${nameOfCurrentMonth} ${day}\nCurrent time is: ${
+    hours >= 10 ? hours : "0" + hours
+  }:${minutes >= 10 ? minutes : "0" + minutes}:${
+    seconds >= 10 ? seconds : "0" + seconds
+  }`;
   return fullDate;
 }
 
-// bot.command("course", async (ctx) => {
-//   try {
-//     await ctx.replyWithHTML(
-//       "<b>Courses</b>",
-//       Markup.inlineKeyboard([
-//         [
-//           Markup.button.callback("Redactors", "btn-1"),
-//           Markup.button.callback("12", "btn-2"),
-//         ],
-//       ])
-//     );
-//   } catch (err) {
-//     console.error(err);
-//   }
-// });
 function addActionBot(name, src, text) {
   bot.action(name, async (ctx) => {
     try {
